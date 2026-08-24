@@ -1,2 +1,10 @@
 # Ignore the whole minilibx-linux
 minilibx-linux/
+obj/
+cub3D
+minilibx-linux/*.o
+minilibx-linux/*.a
+libft/*.o
+libft/*.a
+*.a
+*.o
