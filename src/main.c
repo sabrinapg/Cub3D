@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 #include "../includes/utils.h"
-//#include "../includes/parser.h"
+#include "../includes/parser.h"
 //#include "../includes/validation.h"
 
 int	main(int argc, char **argv)
