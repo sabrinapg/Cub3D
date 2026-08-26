@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.h                                           :+:      :+:    :+:   */
+/*   validation.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/25 14:29:02 by makassa           #+#    #+#             */
-/*   Updated: 2026/08/25 14:31:25 by makassa          ###   ########.fr       */
+/*   Created: 2026/08/25 14:34:00 by makassa           #+#    #+#             */
+/*   Updated: 2026/08/25 14:34:43 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PLAYER_H
-# define PLAYER_H
+#ifndef VALIDATION_H
+# define VALIDATION_H
 
-# include "vector.h"
 
-typedef struct s_player
-{
-	t_vec	pos;
-	t_vec	dir;
-	t_vec	plane;
-	char	orientation;
-}	t_player;
 
 
 # endif
