@@ -16,5 +16,8 @@
 # include "cub3d.h"
 
 int print_error(char *message);
+void init_scene(t_scene *scene);
+void	free_scene(t_scene *scene);
+void	free_split(char **split);
 
 # endif
