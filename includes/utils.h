@@ -19,5 +19,9 @@ int print_error(char *message);
 void init_scene(t_scene *scene);
 void	free_scene(t_scene *scene);
 void	free_split(char **split);
+int		is_empty_line(char *line);
+int		ft_isspace_cub(char c);
+char	*trim_newline(char *line);
+int		has_only_spaces(char *line);
 
 # endif
