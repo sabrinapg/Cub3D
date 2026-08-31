@@ -12,7 +12,7 @@
 
 #include "../../includes/parser.h"
 #include "../../includes/libft.h"
-//#include "../../includes/utils.h"
+#include "../../includes/utils.h"
 #include <fcntl.h>
 
 int	count_file_lines(char *path)
@@ -101,30 +101,4 @@ static int	store_line(char ***lines, char **line, int *index)
 	return (1);
 }
 
-int	read_scene_file(char *path, char ***lines)
-{
-	char	buffer;
-	char	*line;
-	int		fd;
-	int		index;
-	int		count;
 
-	count = count_file_lines(path);
-	*lines = alloc_file_lines(count);
-	if (count <= 0 || !*lines)
-		return (print_error("scene file could not be loaded"));
-	fd = open(path, O_RDONLY);
-	line = NULL;
-	index = 0;
-	while (read(fd, &buffer, 1) > 0)
-	{
-		if (buffer == '\n' && !store_line(lines, &line, &index))
-			return (0);
-		if (buffer != '\n' && !append_char(&line, buffer))
-			return (0);
-	}
-	close(fd);
-	if (line && !store_line(lines, &line, &index))
-		return (0);
-	return (1);
-}
