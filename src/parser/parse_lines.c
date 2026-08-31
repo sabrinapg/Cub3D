@@ -12,7 +12,7 @@
 
 #include "../../includes/parser.h"
 #include "../../includes/libft.h"
-#include "../../includes/utils.h"
+//include "../../includes/utils.h"
 #include <fcntl.h>
 
 int	count_file_lines(char *path)
@@ -61,7 +61,7 @@ char	**alloc_file_lines(int line_count)
 	return (lines);
 }
 
-static int	append_char(char **line, char character)
+int	append_char(char **line, char character)
 {
 	char	*new_line;
 	size_t	len;
@@ -86,7 +86,7 @@ static int	append_char(char **line, char character)
 	return (1);
 }
 
-static int	store_line(char ***lines, char **line, int *index)
+int	store_line(char ***lines, char **line, int *index)
 {
 	if (!*line)
 	{

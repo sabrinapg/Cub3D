@@ -13,6 +13,7 @@
 #include "../../includes/parser.h"
 #include "../../includes/utils.h"
 #include "../../includes/libft.h"
+#include <fcntl.h>
 
 static int	has_cub_extension(char *path)
 {
