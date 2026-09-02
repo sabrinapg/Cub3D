@@ -27,12 +27,13 @@ int	main(int argc, char **argv)
 		free_scene(&game.scene);
 		return (1);
 	}
+
+  /*
 	if (!validate_scene(&game.scene))
 	{
 		free_scene(&game.scene);
 		return (1);
 	}
-	/*
 	init_game(&game);
 	stub_init_game(&game);
 	mlx_loop_hook(game.mlx, render_frame, &game);
