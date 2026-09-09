@@ -52,6 +52,11 @@ fi
 
 if [ -f "$VALID_MAP" ]; then
 	run_valid_test "$VALID_MAP"
+	for map_file in "$MAP_DIR"/valid_*.cub; do
+		if [ -f "$map_file" ]; then
+			run_valid_test "$map_file"
+		fi
+	done
 else
 	printf "[FAIL] missing valid map: %s\n" "$VALID_MAP"
 	fail_count=$((fail_count + 1))
