@@ -93,15 +93,19 @@ int	parse_config_lines(char **lines, t_scene *scene, int *map_start)
 	{
 		if (is_empty_line(lines[index]))
 			index++;
+		else if (is_identifier_line(lines[index]))
+		{
+			if (!parse_identifier_line(lines[index], scene))
+				return (0);
+			index++;
+		}
 		else if (is_map_line(lines[index]))
 		{
 			*map_start = index;
 			return (1);
 		}
-		else if (!parse_identifier_line(lines[index], scene))
-			return (0);
 		else
-			index++;
+			return (print_error("unknown scene identifier"));
 	}
 	return (print_error("scene file does not contain a map"));
 }
