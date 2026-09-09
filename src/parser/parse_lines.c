@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
 #include "../../includes/libft.h"
-//include "../../includes/utils.h"
+#include "../../includes/parser.h"
+// include "../../includes/utils.h"
 #include <fcntl.h>
 
 int	count_file_lines(char *path)
@@ -100,5 +100,3 @@ int	store_line(char ***lines, char **line, int *index)
 	*index = *index + 1;
 	return (1);
 }
-
-
