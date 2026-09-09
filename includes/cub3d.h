@@ -39,26 +39,26 @@
 
 typedef struct s_textures
 {
-	char	*north_path;
-	char	*south_path;
-	char	*east_path;
-	char	*west_path;
-}	t_textures;
+	char		*north_path;
+	char		*south_path;
+	char		*east_path;
+	char		*west_path;
+}				t_textures;
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
-	int	value;
-}	t_color;
+	int			r;
+	int			g;
+	int			b;
+	int			value;
+}				t_color;
 
 typedef struct s_map
 {
-	char	**grid;
-	int		height;
-	int		width;
-}	t_map;
+	char		**grid;
+	int			height;
+	int			width;
+}				t_map;
 
 typedef struct s_scene
 {
@@ -67,7 +67,7 @@ typedef struct s_scene
 	t_color		ceiling;
 	t_map		map;
 	t_player	player;
-}	t_scene;
+}				t_scene;
 
 typedef struct s_game
 {
@@ -79,6 +79,6 @@ typedef struct s_game
 	t_img		tex_s;
 	t_img		tex_e;
 	t_img		tex_w;
-} t_game;
+}				t_game;
 
-# endif
+#endif

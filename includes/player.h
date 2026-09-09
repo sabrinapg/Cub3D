@@ -21,7 +21,6 @@ typedef struct s_player
 	t_vec	dir;
 	t_vec	plane;
 	char	orientation;
-}	t_player;
+}			t_player;
 
-
-# endif
+#endif

@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef VECTOR_H
+#ifndef VECTOR_H
 # define VECTOR_H
-
 
 typedef struct s_vec
 {
 	double	x;
 	double	y;
-}	t_vec;
+}			t_vec;
 
-# endif
+#endif

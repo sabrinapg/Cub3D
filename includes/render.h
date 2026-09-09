@@ -33,6 +33,6 @@ typedef struct s_img
 	int		bpp;
 	int		line_len;
 	int		endian;
-}	t_img;
+}			t_img;
 
-# endif
+#endif

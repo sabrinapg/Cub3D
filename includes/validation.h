@@ -25,4 +25,4 @@ int		validate_no_empty_map_lines(t_map *map);
 int		validate_map_closed(t_map *map);
 char	**duplicate_map_grid(t_map *map);
 
-# endif
+#endif

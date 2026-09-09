@@ -29,4 +29,4 @@ int		parse_texture(char *line, t_scene *scene);
 int		parse_color(char *line, t_scene *scene);
 int		parse_map(char **lines, int start, t_scene *scene);
 
-# endif
+#endif
