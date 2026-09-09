@@ -16,20 +16,18 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 
 SRCS		= main.c \
-			  mlx/hooks.c \
-			  rendering/raycast.c \
-			  rendering/render.c \
-			  rendering/dda.c \
-			  movement/player.c \
-			  utils/stub_map.c
-				parser/parse_color.c \
-			  parser/parse_identifier.c \
-			  parser/parse_lines.c \
-			  parser/parse_map.c \
-			  parser/parse_scene.c \
-			  parser/parse_texture.c \
-			  utils/manage_scene.c \
-			  utils/string_utils.c
+  			  parser/parse_color.c \
+  			  parser/parse_identifier.c \
+  			  parser/parse_lines.c \
+  			  parser/parse_map.c \
+  			  parser/parse_scene.c \
+  			  parser/parse_texture.c \
+  			  utils/manage_scene.c \
+  			  utils/string_utils.c \
+  			  validation/validate_scene.c \
+  			  validation/validate_map.c \
+  			  validation/validate_flood_fill.c
+
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
@@ -41,9 +39,10 @@ $(LIBFT_LIB):
 	make -C $(LIBFT_DIR)
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)/mlx $(OBJ_DIR)/rendering $(OBJ_DIR)/movement $(OBJ_DIR)/utils
+	mkdir -p $(OBJ_DIR)/mlx $(OBJ_DIR)/rendering $(OBJ_DIR)/movement $(OBJ_DIR)/utils $(OBJ_DIR)/parser $(OBJ_DIR)/validation
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC_DIR)/cub3d.h | $(OBJ_DIR)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR) -c $< -o $@
 
 $(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
