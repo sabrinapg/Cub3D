@@ -1,0 +1,11 @@
+NO ./textures/greystone_north.xpm
+SO ./textures/purplestone_south.xpm
+WE ./textures/redbrick_west.xpm
+EA ./textures/wood_east.xpm
+F 1, 2, 3
+C 4, 5, 6
+
+11111
+1N001
+10001
+11111
