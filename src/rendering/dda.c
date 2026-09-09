@@ -23,44 +23,43 @@
 //
 // Then draw that column centr
 
-
-#include "cub3d.h"
+#include "raycast.h"
 
 void	init_dda(t_game *game, t_ray *ray)
 {
+	t_vec	*pos;
+
+	pos = &game->scene.player.pos;
 	ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
-
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (game->player.pos_x - ray->map_x)
-			* ray->delta_dist_x;
+		ray->side_dist_x = (pos->x - ray->map_x) * ray->delta_dist_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player.pos_x)
-			* ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - pos->x) * ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (game->player.pos_y - ray->map_y)
-			* ray->delta_dist_y;
+		ray->side_dist_y = (pos->y - ray->map_y) * ray->delta_dist_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
-			* ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - pos->y) * ray->delta_dist_y;
 	}
 }
 
 void	run_dda(t_game *game, t_ray *ray)
 {
-	int	hit;
+	t_vec	*pos;
+	int		hit;
 
+	pos = &game->scene.player.pos;
 	hit = 0;
 	while (!hit)
 	{
@@ -80,9 +79,9 @@ void	run_dda(t_game *game, t_ray *ray)
 			hit = 1;
 	}
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - game->player.pos_x
+		ray->perp_wall_dist = (ray->map_x - pos->x
 				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		ray->perp_wall_dist = (ray->map_y - game->player.pos_y
+		ray->perp_wall_dist = (ray->map_y - pos->y
 				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
