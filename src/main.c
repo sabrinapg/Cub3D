@@ -34,9 +34,9 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-	init_game(&game);
 
   /*
+	init_game(&game);
 	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_hook, &game);
 	mlx_hook(game.win, 17, 1L << 17, close_hook, &game);
