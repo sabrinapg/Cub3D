@@ -10,10 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../../includes/libft.h"
 #include "../../includes/parser.h"
 #include "../../includes/utils.h"
-#include "../../includes/libft.h"
 
 static int	is_texture_identifier(char *id)
 {
