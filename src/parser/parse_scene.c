@@ -31,12 +31,42 @@ static int	has_cub_extension(char *path)
 	return (1);
 }
 
-int	read_scene_file(char *path, char ***lines)
+static int	fail_read_scene(int fd, char **lines, char *line)
+{
+	if (fd >= 0)
+		close(fd);
+	free(line);
+	free_split(lines);
+	return (print_error("scene file could not be loaded"));
+}
+
+static int	read_file_lines(int fd, char ***lines, char **line)
 {
 	char	buffer;
+	int		index;
+	int		bytes;
+
+	index = 0;
+	bytes = read(fd, &buffer, 1);
+	while (bytes > 0)
+	{
+		if (buffer == '\n' && !store_line(lines, line, &index))
+			return (fail_read_scene(fd, *lines, *line));
+		if (buffer != '\n' && !append_char(line, buffer))
+			return (fail_read_scene(fd, *lines, *line));
+		bytes = read(fd, &buffer, 1);
+	}
+	if (bytes < 0)
+		return (fail_read_scene(fd, *lines, *line));
+	if (*line && !store_line(lines, line, &index))
+		return (fail_read_scene(fd, *lines, *line));
+	return (1);
+}
+
+int	read_scene_file(char *path, char ***lines)
+{
 	char	*line;
 	int		fd;
-	int		index;
 	int		count;
 
 	count = count_file_lines(path);
@@ -44,18 +74,12 @@ int	read_scene_file(char *path, char ***lines)
 	if (count <= 0 || !*lines)
 		return (print_error("scene file could not be loaded"));
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (fail_read_scene(fd, *lines, NULL));
 	line = NULL;
-	index = 0;
-	while (read(fd, &buffer, 1) > 0)
-	{
-		if (buffer == '\n' && !store_line(lines, &line, &index))
-			return (0);
-		if (buffer != '\n' && !append_char(&line, buffer))
-			return (0);
-	}
-	close(fd);
-	if (line && !store_line(lines, &line, &index))
+	if (!read_file_lines(fd, lines, &line))
 		return (0);
+	close(fd);
 	return (1);
 }
 
