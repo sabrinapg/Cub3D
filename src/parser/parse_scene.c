@@ -37,7 +37,7 @@ static int	fail_read_scene(int fd, char **lines, char *line)
 		close(fd);
 	free(line);
 	free_split(lines);
-	return (print_error("scene file could not be loaded"));
+	return (print_error("scene file could not be loaded"), 0);
 }
 
 static int	read_file_lines(int fd, char ***lines, char **line)
@@ -72,7 +72,7 @@ int	read_scene_file(char *path, char ***lines)
 	count = count_file_lines(path);
 	*lines = alloc_file_lines(count);
 	if (count <= 0 || !*lines)
-		return (print_error("scene file could not be loaded"));
+		return (print_error("scene file could not be loaded"), 0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (fail_read_scene(fd, *lines, NULL));
@@ -91,7 +91,7 @@ int	parse_scene(char *path, t_scene *scene)
 	lines = NULL;
 	map_start = -1;
 	if (!has_cub_extension(path))
-		return (print_error("scene file must use .cub extension"));
+		return (print_error("scene file must use .cub extension"), 0);
 	if (!read_scene_file(path, &lines))
 		return (0);
 	if (!parse_config_lines(lines, scene, &map_start))

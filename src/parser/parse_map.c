@@ -64,19 +64,19 @@ int	copy_map_lines(char **lines, int start, t_map *map)
 int	parse_map(char **lines, int start, t_scene *scene)
 {
 	if (!lines || start < 0 || !scene)
-		return (print_error("missing map"));
+		return (print_error("missing map"), 0);
 	scene->map.height = count_map_height(lines, start);
 	if (scene->map.height <= 0)
-		return (print_error("missing map"));
+		return (print_error("missing map"), 0);
 	scene->map.width = get_map_width(lines, start);
 	scene->map.grid = malloc(sizeof(char *) * (scene->map.height + 1));
 	if (!scene->map.grid)
-		return (print_error("memory allocation failed"));
+		return (print_error("memory allocation failed"), 0);
 	if (!copy_map_lines(lines, start, &scene->map))
 	{
 		free_split(scene->map.grid);
 		scene->map.grid = NULL;
-		return (print_error("memory allocation failed"));
+		return (print_error("memory allocation failed"), 0);
 	}
 	return (1);
 }

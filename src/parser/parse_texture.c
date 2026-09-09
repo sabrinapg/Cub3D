@@ -49,9 +49,9 @@ int	set_texture_path(char *id, char *path, t_scene *scene)
 	else if (!ft_strncmp(id, ID_EA, 2))
 		texture_path = &scene->textures.east_path;
 	if (!texture_path)
-		return (print_error("invalid texture identifier"));
+		return (print_error("invalid texture identifier"), 0);
 	if (*texture_path)
-		return (print_error("duplicate texture identifier"));
+		return (print_error("duplicate texture identifier"), 0);
 	*texture_path = path;
 	return (1);
 }
@@ -63,21 +63,21 @@ int	parse_texture(char *line, t_scene *scene)
 	char	*path;
 
 	if (!line || !scene || !is_texture_identifier(line))
-		return (print_error("invalid texture line"));
+		return (print_error("invalid texture line"), 0);
 	index = skip_texture_spaces(line, 2);
 	start = index;
 	while (line[index] && !ft_isspace_cub(line[index]))
 		index++;
 	if (index == start)
-		return (print_error("missing texture path"));
+		return (print_error("missing texture path"), 0);
 	path = ft_substr(line, start, index - start);
 	if (!path)
-		return (print_error("memory allocation failed"));
+		return (print_error("memory allocation failed"), 0);
 	index = skip_texture_spaces(line, index);
 	if (line[index])
 	{
 		free(path);
-		return (print_error("texture line has too many arguments"));
+		return (print_error("texture line has too many arguments"), 0);
 	}
 	if (!set_texture_path(line, path, scene))
 	{

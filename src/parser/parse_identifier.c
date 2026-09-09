@@ -67,7 +67,7 @@ int	parse_identifier_line(char *line, t_scene *scene)
 	int	index;
 
 	if (!is_identifier_line(line))
-		return (print_error("unknown scene identifier"));
+		return (print_error("unknown scene identifier"), 0);
 	index = skip_spaces(line);
 	if (!ft_strncmp(line + index, ID_NO, 2))
 		return (parse_texture(line + index, scene));
@@ -105,7 +105,7 @@ int	parse_config_lines(char **lines, t_scene *scene, int *map_start)
 			return (1);
 		}
 		else
-			return (print_error("unknown scene identifier"));
+			return (print_error("unknown scene identifier"), 0);
 	}
-	return (print_error("scene file does not contain a map"));
+	return (print_error("scene file does not contain a map"), 0);
 }
