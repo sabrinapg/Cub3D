@@ -3,45 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 00:53:20 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/03 15:45:44 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/11 12:11:41 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/11 12:13:24 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(const char *src)
 {
-	size_t	i;
-	size_t	l;
-	char	*copy;
+	int		i;
+	size_t	len;
+	char	*rsrc;
 
 	i = 0;
-	l = ft_strlen(s);
-	copy = (char *)malloc(l + 1);
-	if (!copy)
+	len = ft_strlen(src);
+	rsrc = (char *)malloc((len + 1) * sizeof(char));
+	if (!rsrc)
 		return (NULL);
-	while (s[i])
+	while (src[i])
 	{
-		copy[i] = s[i];
+		rsrc[i] = src[i];
 		i++;
 	}
-	copy[i] = '\0';
-	return (copy);
+	rsrc[i] = '\0';
+	return (rsrc);
 }
-
-/*
-#include <string.h>
-#include <stdio.h>
-int	main(void)
-{
-	const char *src = "Sabrina";
-
-	printf("Created: %s\n", ft_strdup(src));
-	printf("Control: %s\n", strdup(src));
-	
-	return (0);
-}
-*/

@@ -3,25 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 00:31:15 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/03 00:34:37 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/28 14:06:40 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/28 14:11:43 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	write(fd, s, ft_strlen(s));
+	return ;
 }
-
-/*
-int	main(void)
-{
-	char s[] = "Sabrina";
-	ft_putstr(s, 1);
-	return (0);
-}
-*/

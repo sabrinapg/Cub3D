@@ -3,46 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 21:45:07 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/03 15:47:46 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/16 20:36:57 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/16 20:43:34 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char		*d;
-	const char	*s;
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	d = (char *)dest;
-	s = (const char *)src;
-	if (!dest && !src)
-		return (NULL);
-	if (s < d && (s + n) > d)
+	i = 0;
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	if (d == s || n == 0)
+		return (dest);
+	if (d < s)
 	{
-		while (n > 0)
+		while (i < n)
 		{
-			d[n - 1] = s[n - 1];
-			n--;
+			d[i] = s[i];
+			i++;
 		}
 	}
-	else
-		ft_memcpy(dest, src, n);
+	else if (d > s)
+	{
+		while (n--)
+			d[n] = s[n];
+	}
 	return (dest);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	unsigned char d[] = "Geek";
-	unsigned const char s[] = "Quiz";
-	size_t	n = 4;
-	
-	ft_memmove(d, s, n);
-	printf("%s", d);
-	return (0);
-}
-*/

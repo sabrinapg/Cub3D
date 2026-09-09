@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 21:46:14 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/02 21:46:27 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/17 16:09:35 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/17 16:22:04 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,16 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	const unsigned char	*j;
-	unsigned char		find;
 	size_t				i;
+	const unsigned char	*ptr;
 
-	j = (const unsigned char *)s;
-	find = (unsigned char)c;
 	i = 0;
+	ptr = (const unsigned char *)s;
 	while (i < n)
 	{
-		if (j[i] == find)
-			return ((void *)(j + i));
+		if (ptr[i] == (unsigned char)c)
+			return ((void *)(s + i));
 		i++;
 	}
 	return (NULL);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-   char s[] = "Sabrina";
-   char *result = ft_memchr(s, 'i', 7);
-   
-   if (result)
-       printf("Found: %s\n", result);
-   else
-       printf("Not found\n");
-   
-   return (0);
-}
-*/

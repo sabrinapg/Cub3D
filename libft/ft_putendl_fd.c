@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 01:03:34 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/03 01:04:37 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/28 14:14:03 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/28 14:16:51 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	write(fd, s, ft_strlen(s));
+	if (s)
+		ft_putstr_fd(s, fd);
 	write(fd, "\n", 1);
+	return ;
 }

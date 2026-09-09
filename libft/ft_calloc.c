@@ -3,56 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 16:41:14 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/04 21:49:46 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/29 19:28:00 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/29 19:28:12 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t			mx;
-	size_t			i;
-	void			*bx;
-	unsigned char	*byte_bx;
+	void	*new_mem;
 
-	i = 0;
-	if (nmemb != 0 && size != 0 && nmemb > (size_t)-1 / size)
-		return (NULL);
-	mx = nmemb * size;
-	bx = malloc(mx);
-	if (!bx)
-		return (NULL);
-	byte_bx = (unsigned char *)bx;
-	while (i < mx)
+	if (!nmemb || !size)
 	{
-		byte_bx[i] = 0;
-		i++;
+		new_mem = (void *)malloc(1);
+		if (!new_mem)
+			return (NULL);
+		ft_bzero(new_mem, 1);
+		return (new_mem);
 	}
-	return (bx);
+	else if (nmemb > (size_t)-1 / size)
+		return (NULL);
+	new_mem = (void *)malloc(size * nmemb);
+	if (!new_mem)
+		return (NULL);
+	ft_bzero(new_mem, size * nmemb);
+	return (new_mem);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-	int *arr = (int *)ft_calloc(5, sizeof(int));
-	int i = 0;
-	if (arr)
-	{
-		while (i < 5)
-		{
-			printf("%d ", arr[i]);
-			i++;
-		}
-        printf("\n");
-        free(arr);
-    }
-    return (0);
-}
-*/

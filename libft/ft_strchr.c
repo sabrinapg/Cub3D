@@ -3,59 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 21:48:15 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/02 21:48:27 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/12 10:19:50 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/12 11:48:25 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	size_t		i;
+	const char	*s_end;
 
 	i = 0;
+	s_end = s + ft_strlen(s);
+	if ((unsigned char) c == '\0')
+		return ((char *)s_end);
 	while (s[i])
 	{
-		if (s[i] == (char)c)
+		if (s[i] == (unsigned char)c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)&s[i]);
-	return (NULL);
+	return ((char *) NULL);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	const char *str = "Hello, 42 Network!";
-	int c = 'o';
-	char *result = ft_strchr(str, c);
-	
-	if (result)
-		printf("First occurrence of '%c': \"%s\"\n", c, result);
-	else
-		printf("Character '%c' not found in string.\n", c);
-	
-	c = '\0';
-	result = ft_strchr(str, c);
-	
-	if (result)
-		printf("Searching for '\\0': \"%s\"\n", result);
-	else
-		printf("Null terminator not found (should never happen).\n");
-
-	c = 'x';
-	result = ft_strchr(str, c);
-	if (result)
-		printf("Unexpected match for '%c': \"%s\"\n", c, result);
-	else
-		printf("Correctly found no match for '%c'.\n", c);
-	return (0);
-}
-*/

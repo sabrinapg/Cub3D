@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 15:48:16 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/02/26 17:47:10 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/16 15:21:14 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/16 15:22:44 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+
+static int	ft_isupper(int c)
+{
+	return (c >= 'A' && c <= 'Z');
+}
 
 int	ft_tolower(int c)
 {
-	if (c >= 'A' && c <= 'Z')
-		c += 32;
-	return (c);
+	if (ft_isupper(c))
+		return (c + ('a' - 'A'));
+	else
+		return (c);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	int a = 'a';
-	int b = 'B';
-	int j = ft_tolower(a);
-	int k = ft_tolower(b);
-
-	printf("a = %d\n", j);
-	printf("b = %d", k);
-	return (0);
-}
-*/

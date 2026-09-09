@@ -3,30 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 21:47:12 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/02 21:47:25 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/16 14:59:26 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/16 15:12:44 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+
+static int	ft_islower(int c)
+{
+	return (c >= 'a' && c <= 'z');
+}
 
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
+	if (ft_islower(c))
+		return (c - ('a' - 'A'));
+	else
+		return (c);
 }
-/*
-#include <stdio.h>
-int	main(void)
-{
-	int c = 'C';
-	int d = 'd';
-	int j = ft_toupper(c);
-	int k = ft_toupper(d);
-
-	printf("a = %d\n", j);
-	printf("b = %d", k);
-	return (0);
-}
-*/

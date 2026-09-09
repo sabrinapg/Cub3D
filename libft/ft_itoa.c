@@ -3,104 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 18:10:07 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/04 18:10:58 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/24 15:59:16 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/24 16:33:04 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static int	count_digits(int n)
+static size_t	ft_getlen(long long n)
 {
-	int	count;
+	size_t	len;
 
-	count = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		count = 1;
-	while (n != 0)
+	len = 1;
+	while (n >= 10)
 	{
-		n /= 10;
-		count++;
+		n = n / 10;
+		len++;
 	}
-	return (count);
+	return (len);
 }
 
-static char	*handle_min_int(void)
+static void	ft_makestr(char *ptr, long long n, int sig)
 {
-	char	*str;
-	char	*min_int;
-	int		i;
+	size_t	len;
 
-	min_int = "-2147483648";
-	str = malloc(sizeof(char) * 12);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (min_int[i])
+	len = ft_getlen(n);
+	if (sig < 0)
+		len++;
+	ptr[len--] = '\0';
+	while (n >= 10)
 	{
-		str[i] = min_int[i];
-		i++;
+		ptr[len--] = n % 10 + 48;
+		n = n / 10;
 	}
-	str[i] = '\0';
-	return (str);
-}
-
-static void	fill_string(char *result, long num, int len)
-{
-	len--;
-	while (len >= 0)
-	{
-		result[len] = (num % 10) + '0';
-		num /= 10;
-		len--;
-	}
+	ptr[len] = n + 48;
+	if (sig < 0)
+		ptr[0] = '-';
+	return ;
 }
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int		len;
-	int		is_negative;
-	long	num;
+	long long	nb;
+	int			nbstr;
+	int			sig;
+	char		*res;
 
-	if (n == -2147483648)
-		return (handle_min_int());
-	len = count_digits(n);
-	result = malloc(sizeof(char) * (len + 1));
-	if (!result)
-		return (NULL);
-	result[len] = '\0';
-	is_negative = (n < 0);
-	if (n < 0)
-		num = -(long)n;
-	else
-		num = n;
-	fill_string(result, num, len);
-	if (is_negative)
-		result[0] = '-';
-	return (result);
+	if (n == 0)
+		return (ft_strdup("0"));
+	nb = (long long)n;
+	sig = 1;
+	if (nb < 0)
+	{
+		sig = -1;
+		nb = -nb;
+	}
+	nbstr = ft_getlen(nb);
+	if (sig < 0)
+		nbstr++;
+	res = (char *)malloc(sizeof(char) * (nbstr + 1));
+	if (!res)
+		return ((char *) NULL);
+	ft_makestr(res, nb, sig);
+	return (res);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	char *result;
-   
-	result = ft_itoa(42);
-	printf("%s\n", result);
-	free(result);
-   
-	result = ft_itoa(-42);
-	printf("%s\n", result);
-	free(result);
-   
-	result = ft_itoa(-2147483648);
-	printf("%s\n", result);
-	free(result);
-	return (0);
-}*/

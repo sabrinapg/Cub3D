@@ -3,61 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 21:44:22 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/02 21:44:33 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/12 17:38:40 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/12 17:39:10 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int		i;
-	char	*last;
+	size_t		i;
+	const char	*s_end;
 
 	i = 0;
-	last = NULL;
+	s_end = NULL;
+	if ((unsigned char) c == '\0' && s)
+	{
+		s_end = s + ft_strlen(s);
+		return ((char *)s_end);
+	}
 	while (s[i])
 	{
-		if (s[i] == (char)c)
-			last = (char *)&s[i];
+		if (s[i] == (unsigned char)c)
+			s_end = &s[i];
 		i++;
 	}
-	if ((char)c == '\0')
-		return ((char *)&s[i]);
-	return (last);
+	return ((char *)s_end);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	const char *str = "Hello, 42 Network!";
-	int c = 'o';
-	char *result = ft_strrchr(str, c);
-	
-	if (result)
-		printf("Last occurrence of '%c': \"%s\"\n", c, result);
-	else
-		printf("Character '%c' not found in string.\n", c);
-	
-	c = '\0';
-	result = ft_strrchr(str, c);
-	
-	if (result)
-		printf("Searching for '\\0': \"%s\"\n", result);
-	else
-		printf("Null terminator not found (should never happen).\n");
-
-	c = 'x';
-	result = ft_strrchr(str, c);
-	if (result)
-		printf("Unexpected match for '%c': \"%s\"\n", c, result);
-	else
-		printf("Correctly found no match for '%c'.\n", c);
-	return (0);
-}
-*/

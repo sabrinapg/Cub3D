@@ -3,60 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 16:57:13 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/04 17:00:12 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/23 14:58:27 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/23 15:29:52 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
-
-static int	is_in_set(char c, char const *set)
-{
-	while (*set)
-	{
-		if (c == *set)
-			return (1);
-		set++;
-	}
-	return (0);
-}
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*result;
-	size_t	start;
-	size_t	end;
+	char	*res;
 	size_t	i;
+	size_t	j;
+	size_t	len;
 
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
-	start = 0;
-	while (s1[start] && is_in_set(s1[start], set))
-		start++;
-	end = ft_strlen(s1);
-	while (end > start && is_in_set(s1[end - 1], set))
-		end--; 
-	result = malloc(sizeof(char) * (end - start) + 1);
-	if (!result)
-		return (NULL);
+	if (!set)
+		return (ft_strdup(s1));
 	i = 0;
-	while (i < end - start)
-	{
-		result[i] = s1[start + i];
+	while (s1[i] && ft_strchr(set, s1[i]))
 		i++;
-	}
-	result[i] = '\0';
-	return (result);
+	j = ft_strlen(s1);
+	while (j > i && ft_strchr(set, s1[j - 1]))
+		j--;
+	len = j - i;
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, s1 + i, len + 1);
+	return (res);
 }
-
-/*
-int	main(void)
-{
-	char const *s1 = "ab Hello ab";
-	chat const *set = "ab";
-	prtinf("%s", ft_strtrim(s1, set));
-	return (0);
-}
-*/

@@ -3,79 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/04 16:14:00 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/03/04 16:16:58 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/16 10:08:52 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/16 10:51:01 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+static int	ft_isspace(char c)
 {
-	int		i;
-	int		sign;
-	int		final;
-
-	i = 0;
-	final = 0;
-	sign = 1;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	if (str[i] < '0' || str[i] > '9')
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		final = final * 10 + (str[i] - '0');
-		i++;
-	}
-	return (final * sign);
-}
-
-/*
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nb);
-
-int	main(int argc, char **argv)
-{
-	if (argc == 2)
-	{
-		ft_putnbr(ft_atoi(argv[1]));
-		ft_putchar('\n');
-	}
+	if (c == ' ' || c == '\f' || c == '\n' || c == '\r' || c == '\t'
+		|| c == '\v')
+		return (1);
 	else
-		ft_putchar('\n');
-	return (0);
+		return (0);
 }
 
-void	ft_putnbr(int nb)
+int	ft_atoi(const char *nptr)
 {
-	if (nb == -2147483648)
+	int	neg;
+	int	res;
+
+	neg = 0;
+	res = 0;
+	while (ft_isspace(*nptr))
+		nptr++;
+	if (*nptr == '-')
 	{
-		ft_putchar('-');
-		write (1, "2147483648", 10);
+		neg = 1;
+		nptr++;
 	}
-	if (nb < 0)
+	else if (*nptr == '+')
+		nptr++;
+	while (ft_isdigit(*nptr))
 	{
-		ft_putchar('-');
-		nb = -nb;
+		res = res * 10 + (*nptr - '0');
+		nptr++;
 	}
-	if (nb >= 10)
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + '0');
+	if (neg)
+		res = -res;
+	return (res);
 }
-// Evaluators plzzzzz copy this  " ---+--+1234ab567"
-*/

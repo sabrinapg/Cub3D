@@ -3,109 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/02 13:07:24 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2025/06/02 16:59:02 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2025/06/29 20:29:09 by makassa           #+#    #+#             */
+/*   Updated: 2025/06/29 20:29:35 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	wordcount(const char *s, char c)
+static void	ft_freearr(char **res)
 {
-	int	count;
-	int	i;
+	size_t	i;
 
-	count = 0;
 	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
+	while (res[i])
 	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
-			count++;
+		free(res[i]);
 		i++;
 	}
-	return (count);
+	free(res);
 }
 
-static void	free_split(char **result, int idx)
+static int	ft_mallocarr(char ***ptr, char const *s, char c)
 {
-	int	k;
-
-	k = 0;
-	while (k < idx)
-	{
-		free(result[k]);
-		k++;
-	}
-	free(result);
-}
-
-static char	**fill_words(char **result, const char *s, char c)
-{
-	int	start;
-	int	i;
-	int	idx;
-
-	i = 0;
-	idx = 0;
-	while (s[i])
-	{
-		while (s[i] == c)
-			i++;
-		if (s[i] && s[i] != c)
-		{
-			start = i;
-			while (s[i] && s[i] != c)
-				i++;
-			result[idx] = ft_substr(s, start, i - start);
-			if (!result[idx])
-				return (free_split(result, idx), NULL);
-			idx++;
-		}
-	}
-	return (result[idx] = NULL, result);
-}
-
-char	**ft_split(const char *s, char c)
-{
-	char	**result;
-	int		word;
+	size_t	i;
+	int		nw;
 
 	if (!s)
-		return (NULL);
-	word = wordcount(s, c);
-	result = malloc(sizeof(char *) * (word + 1));
-	if (!result)
-		return (NULL);
-	return (fill_words(result, s, c));
+		return (-1);
+	i = 0;
+	nw = 0;
+	while (s[i] == c && s[i])
+		i++;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			nw++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+		else
+			i++;
+	}
+	*ptr = (char **)malloc(sizeof(char *) * (nw + 1));
+	return (nw);
 }
-/*
-#include <stdio.h>
-int	main(void)
+
+static int	ft_fillarr(char **res, char const *s, char c, size_t i)
 {
-	char **a = ft_split("hello world test", "");
-		printf("%s\n", a);
+	size_t	strlen;
+	size_t	k;
+	size_t	ind;
 
-	char **b = ft_split("apple,banana,orange", ",");
-		printf("%s\n", b);
-
-	// Double delimiter means "a", "", ""....
-	char **c = ft_split("a,,b,,c", ",");
-		printf("%s\n", c);
-
-	char **d = ft_split("nodelimiterhere", ",");
-		printf("%s\n", d);
-
-	// Returns null :)
-	char **e = ft_split("", "");
-		printf("%s", e);
-
-	char **f = ft_split("x", ",");
-		printf("%s", f);
-
-	return (0);
+	strlen = 0;
+	ind = i;
+	while (s[ind] != c && s[ind])
+	{
+		ind++;
+		strlen++;
+	}
+	*res = (char *)malloc(sizeof(char) * (strlen + 1));
+	if (!*res)
+		return (-1);
+	k = 0;
+	while (k < strlen)
+	{
+		(*res)[k] = s[i];
+		i++;
+		k++;
+	}
+	(*res)[k] = '\0';
+	return ((int)i);
 }
-*/
+
+char	**ft_split(char const *s, char c)
+{
+	char	**res;
+	char	**ptr;
+	size_t	i;
+	int		tmp;
+
+	tmp = ft_mallocarr(&res, s, c);
+	if (tmp < 0 || !res)
+		return ((char **) NULL);
+	ptr = res;
+	res[tmp] = (char *) NULL;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			tmp = ft_fillarr(ptr, s, c, i);
+			if (tmp < 0)
+				return (ft_freearr(res), (char **) NULL);
+			i = (size_t)tmp;
+			ptr++;
+		}
+		else
+			i++;
+	}
+	return (res);
+}
