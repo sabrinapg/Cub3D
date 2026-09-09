@@ -12,7 +12,7 @@
 
 #include "../../includes/libft.h"
 
-int		ft_isspace_cub(char c)
+int	ft_isspace_cub(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n')
 		return (1);
@@ -21,8 +21,7 @@ int		ft_isspace_cub(char c)
 	return (0);
 }
 
-
-int		is_empty_line(char *line)
+int	is_empty_line(char *line)
 {
 	int	index;
 
@@ -53,7 +52,7 @@ char	*trim_newline(char *line)
 	return (line);
 }
 
-int		has_only_spaces(char *line)
+int	has_only_spaces(char *line)
 {
 	return (is_empty_line(line));
 }
