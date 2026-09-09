@@ -12,8 +12,23 @@
 
 #include "../../includes/validation.h"
 #include "../../includes/utils.h"
+#include "../../includes/libft.h"
 #include <fcntl.h>
 #include <unistd.h>
+
+static int	has_xpm_extension(char *path)
+{
+	int	len;
+
+	if (!path)
+		return (0);
+	len = ft_strlen(path);
+	if (len <= 4)
+		return (0);
+	if (ft_strncmp(path + len - 4, ".xpm", 5) != 0)
+		return (0);
+	return (1);
+}
 
 static int	validate_texture_path(char *path)
 {
@@ -21,6 +36,8 @@ static int	validate_texture_path(char *path)
 
 	if (!path)
 		return (print_error("missing texture path"), 0);
+	if (!has_xpm_extension(path))
+		return (print_error("texture file must use .xpm extension"), 0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (print_error("texture file could not be opened"), 0);
