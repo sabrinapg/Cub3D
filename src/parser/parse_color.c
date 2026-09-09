@@ -9,24 +9,15 @@
 /*   Updated: 2026/08/31 16:27:49 by makassa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../../includes/parser.h"
+#include "../../includes/utils.h"
+#include "../../includes/libft.h"
 
 static int	skip_color_spaces(char *line, int index)
 {
 	while (line[index] && ft_isspace_cub(line[index]))
 		index++;
 	return (index);
-}
-
-static int	color_to_int(t_color *color)
-{
-	int	red;
-	int	green;
-	int	blue;
-
-	red = color->r << 16;
-	green = color->g << 8;
-	blue = color->b;
-	return (red + green + blue);
 }
 
 static int	parse_rgb_component(char *value, int *index, int *component)
@@ -36,6 +27,7 @@ static int	parse_rgb_component(char *value, int *index, int *component)
 
 	number = 0;
 	has_digit = 0;
+	*index = skip_color_spaces(value, *index);
 	while (value[*index] && ft_isdigit(value[*index]))
 	{
 		has_digit = 1;
@@ -50,6 +42,15 @@ static int	parse_rgb_component(char *value, int *index, int *component)
 	return (1);
 }
 
+static int	parse_rgb_comma(char *value, int *index)
+{
+	*index = skip_color_spaces(value, *index);
+	if (value[*index] != ',')
+		return (0);
+	*index = *index + 1;
+	return (1);
+}
+
 static int	parse_rgb(char *value, t_color *color)
 {
 	int	index;
@@ -57,17 +58,18 @@ static int	parse_rgb(char *value, t_color *color)
 	index = 0;
 	if (!parse_rgb_component(value, &index, &color->r))
 		return (0);
-	if (value[index++] != ',')
+	if (!parse_rgb_comma(value, &index))
 		return (0);
 	if (!parse_rgb_component(value, &index, &color->g))
 		return (0);
-	if (value[index++] != ',')
+	if (!parse_rgb_comma(value, &index))
 		return (0);
 	if (!parse_rgb_component(value, &index, &color->b))
 		return (0);
+	index = skip_color_spaces(value, index);
 	if (value[index])
 		return (0);
-	color->value = color_to_int(color);
+	color->value = (color->r << 16) + (color->g << 8) + color->b;
 	return (1);
 }
 
@@ -86,16 +88,13 @@ int	parse_color(char *line, t_scene *scene)
 	if (color->value != -1)
 		return (print_error("duplicate color identifier"), 0);
 	index = skip_color_spaces(line, 1);
-	start = index;
-	while (line[index] && !ft_isspace_cub(line[index]))
-		index++;
-	if (index == start)
+	if (!line[index])
 		return (print_error("missing color value"), 0);
-	value = ft_substr(line, start, index - start);
+	start = index;
+	value = ft_substr(line, start, ft_strlen(line + start));
 	if (!value)
 		return (print_error("memory allocation failed"), 0);
-	index = skip_color_spaces(line, index);
-	if (line[index] || !parse_rgb(value, color))
+	if (!parse_rgb(value, color))
 		return (free(value), print_error("invalid color value"), 0);
 	free(value);
 	return (1);
