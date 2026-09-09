@@ -16,17 +16,24 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 
 SRCS		= main.c \
-  			  parser/parse_color.c \
-  			  parser/parse_identifier.c \
-  			  parser/parse_lines.c \
-  			  parser/parse_map.c \
-  			  parser/parse_scene.c \
-  			  parser/parse_texture.c \
-  			  utils/manage_scene.c \
-  			  utils/string_utils.c \
-  			  validation/validate_scene.c \
-  			  validation/validate_map.c \
-  			  validation/validate_flood_fill.c
+			  parser/parse_color.c \
+			  parser/parse_identifier.c \
+			  parser/parse_lines.c \
+			  parser/parse_map.c \
+			  parser/parse_scene.c \
+			  parser/parse_texture.c \
+			  utils/manage_scene.c \
+			  utils/string_utils.c \
+			  validation/validate_scene.c \
+			  validation/validate_map.c \
+			  validation/validate_flood_fill.c \
+			  rendering/raycast.c \
+			  rendering/dda.c \
+			  rendering/render.c \
+			  rendering/map_utils.c \
+			  movement/player.c \
+			  mlx/init.c \
+			  mlx/hooks.c
 
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
