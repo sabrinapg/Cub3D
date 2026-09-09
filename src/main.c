@@ -13,7 +13,7 @@
 #include "../includes/cub3d.h"
 #include "../includes/utils.h"
 #include "../includes/parser.h"
-//#include "../includes/validation.h"
+#include "../includes/validation.h"
 
 int	main(int argc, char **argv)
 {
@@ -28,14 +28,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
-  /*
 	if (!validate_scene(&game.scene))
 	{
 		free_scene(&game.scene);
 		return (1);
 	}
+
 	init_game(&game);
-	stub_init_game(&game);
+
+  /*
 	mlx_loop_hook(game.mlx, render_frame, &game);
 	mlx_hook(game.win, 2, 1L << 0, key_hook, &game);
 	mlx_hook(game.win, 17, 1L << 17, close_hook, &game);
