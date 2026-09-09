@@ -28,6 +28,14 @@ static int	is_texture_identifier(char *id)
 	return (0);
 }
 
+static int	free_texture_path(char *path, char *message)
+{
+	free(path);
+	if (message)
+		return (print_error(message), 0);
+	return (0);
+}
+
 static int	skip_texture_spaces(char *line, int index)
 {
 	while (line[index] && ft_isspace_cub(line[index]))
@@ -75,14 +83,8 @@ int	parse_texture(char *line, t_scene *scene)
 		return (print_error("memory allocation failed"), 0);
 	index = skip_texture_spaces(line, index);
 	if (line[index])
-	{
-		free(path);
-		return (print_error("texture line has too many arguments"), 0);
-	}
+		return (free_texture_path(path, "texture line has too many arguments"));
 	if (!set_texture_path(line, path, scene))
-	{
-		free(path);
-		return (0);
-	}
+		return (free_texture_path(path, NULL));
 	return (1);
 }
