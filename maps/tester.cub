@@ -1,13 +1,13 @@
-NO ./textures/north_texture
+NO ./textures/greystone_north.xpm
 
-SO ./textures/south_texture
-
-
-WE ./textures/west_texture
+SO ./textures/purplestone_south.xpm
 
 
+WE ./textures/redbrick_west.xpm
 
-EA ./textures/east_texture
+
+
+EA ./textures/wood_east.xpm
 
 F 220,100,0
 C 225,30,0
