@@ -6,7 +6,7 @@
 /*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:24:08 by makassa           #+#    #+#             */
-/*   Updated: 2026/09/13 18:47:31 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/13 19:08:15 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 # define ID_F "F"
 # define ID_C "C"
 
-# define MAP_WALL "1"
-# define MAP_EMPTY "0"
-# define MAP_SPACE " "
+# define MAP_WALL 49    // '1'
+# define MAP_EMPTY 48   // '0'
+# define MAP_SPACE 32   // ' '
 
-# define PLAYER_N "N"
-# define PLAYER_S "S"
-# define PLAYER_E "E"
-# define PLAYER_W "W"
+# define PLAYER_N 78    // 'N'
+# define PLAYER_S 83    // 'S'
+# define PLAYER_E 69    // 'E'
+# define PLAYER_W 87    // 'W'
 
 # define RGB_MIN 0
 # define RGB_MAX 255
