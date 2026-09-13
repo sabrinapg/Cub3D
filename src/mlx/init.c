@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/13 18:37:39 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 18:37:41 by dkpg-md-         ###   ########.fr       */
+/*   Created: 2026/09/13 18:37:37 by dkpg-md-          #+#    #+#             */
+/*   Updated: 2026/09/13 19:17:38 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ void	init_game(t_game *game)
 			&game->screen.endian);
 }
 
+static void	destroy_texture(t_game *game, t_img *tex)
+{
+	if (tex->img)
+		mlx_destroy_image(game->mlx, tex->img);
+}
+
 void	cleanup_game(t_game *game)
 {
-	if (game->tex_n.img)
-		mlx_destroy_image(game->mlx, game->tex_n.img);
-	if (game->tex_s.img)
-		mlx_destroy_image(game->mlx, game->tex_s.img);
-	if (game->tex_e.img)
-		mlx_destroy_image(game->mlx, game->tex_e.img);
-	if (game->tex_w.img)
-		mlx_destroy_image(game->mlx, game->tex_w.img);
+	destroy_texture(game, &game->tex_n);
+	destroy_texture(game, &game->tex_s);
+	destroy_texture(game, &game->tex_e);
+	destroy_texture(game, &game->tex_w);
 	if (game->screen.img)
 		mlx_destroy_image(game->mlx, game->screen.img);
 	if (game->win)
