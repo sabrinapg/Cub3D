@@ -6,10 +6,11 @@
 /*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 18:37:37 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 19:17:38 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/13 23:55:11 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/raycast.h"
 #include "../../includes/cub3d.h"
 
