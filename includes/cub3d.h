@@ -24,14 +24,14 @@
 # define ID_F "F"
 # define ID_C "C"
 
-# define MAP_WALL '1'
-# define MAP_EMPTY '0'
-# define MAP_SPACE ' '
+# define MAP_WALL 49 
+# define MAP_EMPTY 48
+# define MAP_SPACE 32
 
-# define PLAYER_N 'N'
-# define PLAYER_S 'S'
-# define PLAYER_E 'E'
-# define PLAYER_W 'W'
+# define PLAYER_N 78
+# define PLAYER_S 83
+# define PLAYER_E 69
+# define PLAYER_W 87
 
 # define RGB_MIN 0
 # define RGB_MAX 255
