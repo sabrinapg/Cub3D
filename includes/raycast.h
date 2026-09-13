@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 18:42:16 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 18:42:18 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/14 00:50:57 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define ROT_SPEED 0.03
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+
+# define MINIMAP_CELL 3
+# define MINIMAP_MARGIN 10
 
 typedef struct s_ray
 {
@@ -71,5 +74,6 @@ void	init_textures(t_game *game);
 t_img	*pick_texture(t_game *game, t_ray *ray);
 int		sample_texture(t_img *tex, int tex_x, int tex_y);
 t_img	*get_tex_column(t_game *game, t_ray *ray, int *tex_x);
+void	draw_minimap(t_game *game);
 
 #endif
