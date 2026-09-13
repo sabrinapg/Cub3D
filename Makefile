@@ -32,6 +32,7 @@ SRCS		= main.c \
 			  rendering/render.c \
 			  rendering/texture.c \
 			  rendering/map_utils.c \
+			  rendering/minimap.c \
 			  movement/player_rad.c \
 			  movement/player_dir.c \
 			  movement/player.c \
