@@ -1,4 +1,18 @@
-#include "raycast.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   player.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/09 02:21:54 by dkpg-md-          #+#    #+#             */
+/*   Updated: 2026/09/13 18:28:58 by dkpg-md-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/cub3d.h"
+#include "../../includes/raycast.h"
+#include "../../includes/utils.h"
 
 static void	set_player_direction(t_player *player, char c)
 {
@@ -26,51 +40,44 @@ static void	set_player_direction(t_player *player, char c)
 	player->plane.y = -player->dir.x * FOV;
 }
 
+static int	find_player_in_row(t_player *player, char *row, int y)
+{
+	int		x;
+	char	c;
+
+	x = 0;
+	while (row[x])
+	{
+		c = row[x];
+		if (c == PLAYER_N || c == PLAYER_S
+			|| c == PLAYER_E || c == PLAYER_W)
+		{
+			player->orientation = c;
+			player->pos.x = x + 0.5;
+			player->pos.y = y + 0.5;
+			set_player_direction(player, c);
+			return (1);
+		}
+		x++;
+	}
+	return (0);
+}
+
 void	init_player_from_map(t_game *game)
 {
 	t_map		*map;
 	t_player	*player;
-	int			x;
 	int			y;
-	char		c;
 
 	map = &game->scene.map;
 	player = &game->scene.player;
 	y = 0;
 	while (y < map->height)
 	{
-		x = 0;
-		while (map->grid[y][x])
-		{
-			c = map->grid[y][x];
-			if (c == PLAYER_N || c == PLAYER_S
-				|| c == PLAYER_E || c == PLAYER_W)
-			{
-				player->orientation = c;
-				player->pos.x = x + 0.5;
-				player->pos.y = y + 0.5;
-				set_player_direction(player, c);
-				return ;
-			}
-			x++;
-		}
+		if (find_player_in_row(player, map->grid[y], y))
+			return ;
 		y++;
 	}
-}
-
-void	move_player(t_game *game, double move_x, double move_y)
-{
-	t_player	*player;
-	int			new_map_x;
-	int			new_map_y;
-
-	player = &game->scene.player;
-	new_map_x = (int)(player->pos.x + move_x);
-	new_map_y = (int)(player->pos.y + move_y);
-	if (!is_wall(game, new_map_x, (int)player->pos.y))
-		player->pos.x += move_x;
-	if (!is_wall(game, (int)player->pos.x, new_map_y))
-		player->pos.y += move_y;
 }
 
 void	rotate_player(t_game *game, double angle)
