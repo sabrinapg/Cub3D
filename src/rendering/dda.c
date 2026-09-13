@@ -6,7 +6,7 @@
 /*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 16:39:49 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 17:22:11 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/13 23:54:24 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,18 @@ static void	calc_perp_dist(t_game *game, t_ray *ray)
 
 	pos = &game->scene.player.pos;
 	if (ray->side == 0)
+	{
 		ray->perp_wall_dist = (ray->map_x - pos->x
 				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->wall_x = pos->y + ray->perp_wall_dist * ray->ray_dir_y;
+	}
 	else
+	{
 		ray->perp_wall_dist = (ray->map_y - pos->y
 				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->wall_x = pos->x + ray->perp_wall_dist * ray->ray_dir_x;
+	}
+	ray->wall_x -= floor(ray->wall_x);
 }
 
 void	run_dda(t_game *game, t_ray *ray)
