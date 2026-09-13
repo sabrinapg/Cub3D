@@ -1,27 +1,14 @@
-// the dir vector points to where the player is facing
-// the plane vector defines field of view
-// its length relative to dir sets the FOV.
-// Typically 66 degrees, plane length circa 0.66 if dir = 1 (length)
-
-
-// DDA Loop
-//
-// For each screen column x from 0 to WIDTH
-// Convert x to camera space: camera_x = 2 * x / WIDTH - 1 (ranges -1 to 1)
-//
-// Ray direction: ray_dir_x = dir_x + plane_x * camera_x (vice versa for y)
-// Figure out which grid cell you"re in and step cell-by-cell (not pixel by pixel) until hit a wall which is "1" in map
-// Track whether crossed vertical/horizontal grid line - tells which wall tetexture NSEW to use
-
-
-// Fisheye Fix
-// Use the perpendicular distance to the tall (not raw Euclidean distance from player to hit point) or get warped/buldging view.
-
-
-// Wall height
-// line_height = (int)(WINDOW_HEIGHT / perp_wall_dist);
-//
-// Then draw that column centr
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/13 16:39:49 by dkpg-md-          #+#    #+#             */
+/*   Updated: 2026/09/13 17:22:11 by dkpg-md-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "raycast.h"
 
@@ -54,6 +41,19 @@ void	init_dda(t_game *game, t_ray *ray)
 	}
 }
 
+static void	calc_perp_dist(t_game *game, t_ray *ray)
+{
+	t_vec	*pos;
+
+	pos = &game->scene.player.pos;
+	if (ray->side == 0)
+		ray->perp_wall_dist = (ray->map_x - pos->x
+				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
+	else
+		ray->perp_wall_dist = (ray->map_y - pos->y
+				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+}
+
 void	run_dda(t_game *game, t_ray *ray)
 {
 	t_vec	*pos;
@@ -78,10 +78,5 @@ void	run_dda(t_game *game, t_ray *ray)
 		if (is_wall(game, ray->map_x, ray->map_y))
 			hit = 1;
 	}
-	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - pos->x
-				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
-	else
-		ray->perp_wall_dist = (ray->map_y - pos->y
-				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
+	calc_perp_dist(game, ray);
 }
