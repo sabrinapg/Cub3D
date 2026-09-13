@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.d      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/13 18:42:16 by dkpg-md-          #+#    #+#             */
+/*   Updated: 2026/09/13 18:42:18 by dkpg-md-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RAYCAST_H
 # define RAYCAST_H
 
@@ -5,8 +17,11 @@
 # include "mlx.h"
 # include <math.h>
 
-# define MOVE_SPEED 0.05
+# define PLAYER_RADIUS 0.2
+# define MOVE_SPEED 0.03
 # define ROT_SPEED 0.03
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 typedef struct s_ray
 {
@@ -20,6 +35,7 @@ typedef struct s_ray
 	double	delta_dist_x;
 	double	delta_dist_y;
 	double	perp_wall_dist;
+	double	wall_x;
 	int		step_x;
 	int		step_y;
 	int		side;
@@ -50,5 +66,10 @@ int		is_wall(t_game *game, int map_x, int map_y);
 // my movement side
 void	move_player(t_game *game, double move_x, double move_y);
 void	rotate_player(t_game *game, double angle);
+
+void	init_textures(t_game *game);
+t_img	*pick_texture(t_game *game, t_ray *ray);
+int		sample_texture(t_img *tex, int tex_x, int tex_y);
+t_img	*get_tex_column(t_game *game, t_ray *ray, int *tex_x);
 
 #endif
