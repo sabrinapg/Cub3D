@@ -6,11 +6,12 @@
 /*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 16:24:32 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 16:38:55 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/14 00:26:41 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+#include "../includes/libft.h"
 #include "../includes/parser.h"
 #include "../includes/utils.h"
 #include "../includes/validation.h"
@@ -41,6 +42,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
+	ft_bzero(&game, sizeof(t_game));
 	if (!args_validate(argc, argv, &game))
 		return (1);
 	init_player_from_map(&game);
