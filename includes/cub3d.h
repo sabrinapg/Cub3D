@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makassa <makassa@student.42berlin.de>      +#+  +:+       +#+        */
+/*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 14:24:08 by makassa           #+#    #+#             */
-/*   Updated: 2026/08/25 14:28:39 by makassa          ###   ########.fr       */
+/*   Updated: 2026/09/13 18:47:31 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "player.h"
 # include "render.h"
+# include <stdlib.h>
+
 # define ERR_PREFIX "Error\n"
 
 # define ID_NO "NO"
@@ -24,14 +26,14 @@
 # define ID_F "F"
 # define ID_C "C"
 
-# define MAP_WALL '1'
-# define MAP_EMPTY '0'
-# define MAP_SPACE ' '
+# define MAP_WALL "1"
+# define MAP_EMPTY "0"
+# define MAP_SPACE " "
 
-# define PLAYER_N 'N'
-# define PLAYER_S 'S'
-# define PLAYER_E 'E'
-# define PLAYER_W 'W'
+# define PLAYER_N "N"
+# define PLAYER_S "S"
+# define PLAYER_E "E"
+# define PLAYER_W "W"
 
 # define RGB_MIN 0
 # define RGB_MAX 255
