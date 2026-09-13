@@ -30,7 +30,10 @@ SRCS		= main.c \
 			  rendering/raycast.c \
 			  rendering/dda.c \
 			  rendering/render.c \
+			  rendering/texture.c \
 			  rendering/map_utils.c \
+			  movement/player_rad.c \
+			  movement/player_dir.c \
 			  movement/player.c \
 			  mlx/init.c \
 			  mlx/hooks.c
