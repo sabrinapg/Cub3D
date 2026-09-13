@@ -6,7 +6,7 @@
 /*   By: dkpg-md- <dkpg-md-@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/13 16:42:21 by dkpg-md-          #+#    #+#             */
-/*   Updated: 2026/09/13 19:24:02 by dkpg-md-         ###   ########.fr       */
+/*   Updated: 2026/09/14 00:16:58 by dkpg-md-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	render_frame(t_game *game)
 		draw_column(game, &ray, x);
 		x++;
 	}
+	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
 	return (0);
 }
