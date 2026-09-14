@@ -63,10 +63,8 @@ static void	calc_perp_dist(t_game *game, t_ray *ray)
 
 void	run_dda(t_game *game, t_ray *ray)
 {
-	t_vec	*pos;
 	int		hit;
 
-	pos = &game->scene.player.pos;
 	hit = 0;
 	while (!hit)
 	{
